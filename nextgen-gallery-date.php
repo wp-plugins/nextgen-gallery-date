@@ -3,7 +3,7 @@
 Plugin Name: NextGEN Gallery Date
 Plugin URI: 
 Description: This plugin add 'added date' and 'modified date' to ngg_album and ngg_gallery db tables
-Version: 0.1
+Version: 0.1.2
 Author: Roberto Cantarano
 Author URI: http://www.cantarano.com
 */
@@ -29,8 +29,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('Non puoi accedere direttamente a questa pagina...'); }
 
 /* ini_set('display_errors', '1');
- ini_set('error_reporting', E_ALL);
-*/
+ ini_set('error_reporting', E_ALL);*/
+
 $rcwd_ngg_base_page = 'admin.php?page=nggallery-manage-gallery';
 
 if (!class_exists('rcwdNggDate')){
@@ -66,7 +66,6 @@ if (!class_exists('rcwdNggDate')){
 
 		function vars_and_constants(){
 			global $wpdb;
-			$this->plugin_dirname = 'nextgen-gallery-date';
 			define('RCWDNGGDATE_DIRNAME', plugin_basename( dirname(__FILE__)));
 			define('RCWDNGGDATE_URLPATH', trailingslashit(plugins_url('',__FILE__)));
 			define('RCWDNGGDATE_ALBUM_TAB', $wpdb->prefix.'ngg_album');
