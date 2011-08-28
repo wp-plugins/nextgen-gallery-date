@@ -3,7 +3,7 @@
 Plugin Name: NextGEN Gallery Date
 Plugin URI: 
 Description: This plugin add 'added date' and 'modified date' to ngg_album and ngg_gallery db tables
-Version: 0.1
+Version: 0.1.1
 Author: Roberto Cantarano
 Author URI: http://www.cantarano.com
 */

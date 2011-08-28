@@ -3,7 +3,7 @@ Contributors: Roberto Cantarano
 Tags: photos,flash,slideshow,images,gallery,media,admin,post,photo-albums,pictures,widgets,photo,picture,image,nextgen-gallery,nextgen gallery,date,nextgen-gallery-date,nextgen gallery date
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: trunk
+Stable tag: 0.1.1
 
 This plugin will let you sort the galleries by date and get info about gallery creation (and modification) date. 
 
@@ -78,6 +78,9 @@ That's it ... Have fun
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= V0.1.1 - 28.08.2011 =
+* Fixed some bugs which did not allow to work with NextGEN Gallery Comments
 
 = V0.1 - 24.08.2011 =
 * Initial release

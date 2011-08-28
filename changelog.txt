@@ -1,5 +1,8 @@
-NextGEN Gallery Comments
+NextGEN Gallery Date
 by Roberto Cantarano
+
+= V0.1.1 - 28.08.2011 =
+* Fixed some bugs which did not allow to work with NextGEN Gallery Comments
 
 = V0.1 - 24.08.2011 =
 * Initial release
