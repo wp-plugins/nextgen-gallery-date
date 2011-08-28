@@ -11,6 +11,10 @@ This plugin will let you sort the galleries by date and get info about gallery c
 
 **Please use at least version 1.8.3 of NextGEN Gallery. This plugin is not tested with lower versions**
 
+**[ A T T E N T I O N ] NextGEN Gallery core modification required!**
+
+Read [installation page](http://wordpress.org/extend/plugins/nextgen-gallery-date/installation/) 
+
 NextGEN Gallery Date is an add-on for the best wordpress gallery plugin i have seen! With my plugin, you can sort galleries by date, show gallery creation and modificatio date inside gallery templates.
 It adds two new columns for gallery table:
  
