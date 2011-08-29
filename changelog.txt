@@ -1,6 +1,10 @@
 NextGEN Gallery Date
 by Roberto Cantarano
 
+= V0.1.2 - 28.08.2011 =
+* Fix: plugin forum link was incorrect
+* Fix: NGG core modification instructions: filter line is incomplete (need ; at the end)
+
 = V0.1.1 - 28.08.2011 =
 * Fixed some bugs which did not allow to work with NextGEN Gallery Comments
 
