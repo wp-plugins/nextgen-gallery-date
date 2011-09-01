@@ -13,7 +13,7 @@ class rcwdNggDateAdmin{
 		$this->nggdate_options = $rcwdNggDate->nggdate_options;
 		add_action("admin_menu", array(&$this, "admin_menu"));
 		add_action('admin_print_styles', array(&$this, 'load_styles') ); 
-		if($_GET['page'] == 'nggallery-manage-album'){
+		if(@$_GET['page'] == 'nggallery-manage-album'){
 			require_once(dirname(__FILE__).'/manage-album-support.php');
 		}
 	}

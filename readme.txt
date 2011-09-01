@@ -3,13 +3,17 @@ Contributors: Roberto Cantarano
 Tags: photos,flash,slideshow,images,gallery,media,admin,post,photo-albums,pictures,widgets,photo,picture,image,nextgen-gallery,nextgen gallery,date,nextgen-gallery-date,nextgen gallery date
 Requires at least: 3.1
 Tested up to: 3.2
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 
 This plugin will let you sort the galleries by date and get info about gallery creation (and modification) date. 
 
 == Description ==
 
 **Please use at least version 1.8.3 of NextGEN Gallery. This plugin is not tested with lower versions**
+
+**[ A T T E N T I O N ] NextGEN Gallery core modification required!**
+
+Read [installation page](http://wordpress.org/extend/plugins/nextgen-gallery-date/installation/) 
 
 NextGEN Gallery Date is an add-on for the best wordpress gallery plugin i have seen! With my plugin, you can sort galleries by date, show gallery creation and modificatio date inside gallery templates.
 It adds two new columns for gallery table:
@@ -55,7 +59,7 @@ To make the change, follow the instructions:
 
 3.  Enter the following filter:
     -----------------------
-    $galleries = apply_filters('ngg_album_galleries_before_paging', $galleries, $album)
+    $galleries = apply_filters('ngg_album_galleries_before_paging', $galleries, $album);
     ------------------------;
 
 4.  To check if you have done correctly, check the screenshot (plugins/nextgen-gallery-date/date/admin/images/ngg-new-filter.png);
@@ -78,6 +82,19 @@ That's it ... Have fun
 == Frequently Asked Questions ==
 
 == Changelog ==
+
+= V0.1.4 - 01.09.2011 =
+* Some core modifications
+
+= V0.1.3 - 29.08.2011 =
+* Fix: modified date info is incorrect
+
+= V0.1.2 - 28.08.2011 =
+* Fix: plugin forum link was incorrect
+* Fix: NGG core modification instructions: filter line is incomplete (need ; at the end)
+
+= V0.1.1 - 28.08.2011 =
+* Fixed some bugs which did not allow to work with NextGEN Gallery Comments
 
 = V0.1 - 24.08.2011 =
 * Initial release
