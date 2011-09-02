@@ -3,7 +3,7 @@
 Plugin Name: NextGEN Gallery Date
 Plugin URI: 
 Description: This plugin add 'added date' and 'modified date' to ngg_album and ngg_gallery db tables
-Version: 0.1
+Version: 0.1.5
 Author: Roberto Cantarano
 Author URI: http://www.cantarano.com
 */
@@ -28,9 +28,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // Stop direct call
 if(preg_match('#' . basename(__FILE__) . '#', $_SERVER['PHP_SELF'])) { die('Non puoi accedere direttamente a questa pagina...'); }
 
-/* ini_set('display_errors', '1');
+ ini_set('display_errors', '1');
  ini_set('error_reporting', E_ALL);
-*/
+
 $rcwd_ngg_base_page = 'admin.php?page=nggallery-manage-gallery';
 
 if (!class_exists('rcwdNggDate')){
@@ -38,35 +38,32 @@ if (!class_exists('rcwdNggDate')){
 		
 		function init(){
 			$this->vars_and_constants();	
-			if (!in_array($this->depends, $this->active_plugins)){
-				deactivate_plugins(plugin_basename(__FILE__));
-				wp_die("Questo plugin necessita l'attivazione di NEXTGEN... che non risulta essere presente.");
-				return; 
+			if (in_array($this->depends, $this->active_plugins)){
+				$this->load_options();				
+				$this->functions();				
+				$this->classes();				
+				register_activation_hook( $this->plugin_name, array(&$this, 'activate') );
+				register_deactivation_hook( $this->plugin_name, array(&$this, 'deactivate') );
+				//register_uninstall_hook( $this->plugin_name, array(&$this, 'uninstall') );
+				add_action( 'plugins_loaded', array(&$this, 'start_plugin') );		
+				include_once(dirname(__FILE__).'/date/date.php');
+				if(is_admin()){
+					if(isset($_GET['action']) and $_GET['action'] == 'remove-notice'){
+						$this->nggdate_options['remove-notice'] = true;
+						update_option('nggdate_options', $this->nggdate_options);
+					}
+					if($this->nggdate_options['remove-notice'] !== true){
+						add_action( 'admin_notices', array(&$this, 'notice') );
+					}
+					require_once(dirname(__FILE__).'/date/admin/admin.php');
+					$this->rcwdNggDateAdmin = new rcwdNggDateAdmin();
+				}
 			}				
-			$this->load_options();				
-			$this->functions();				
-			$this->classes();				
-			register_activation_hook( $this->plugin_name, array(&$this, 'activate') );
-			register_deactivation_hook( $this->plugin_name, array(&$this, 'deactivate') );
-			//register_uninstall_hook( $this->plugin_name, array(&$this, 'uninstall') );
-			add_action( 'plugins_loaded', array(&$this, 'start_plugin') );		
-			include_once(dirname(__FILE__).'/date/date.php');
-			if(is_admin()){
-				if(isset($_GET['action']) and $_GET['action'] == 'remove-notice'){
-					$this->nggdate_options['remove-notice'] = true;
-					update_option('nggdate_options', $this->nggdate_options);
-				}
-				if($this->nggdate_options['remove-notice'] !== true){
-					add_action( 'admin_notices', array(&$this, 'notice') );
-				}
-				require_once(dirname(__FILE__).'/date/admin/admin.php');
-				$this->rcwdNggDateAdmin = new rcwdNggDateAdmin();
-			}
 		}
 
 		function vars_and_constants(){
 			global $wpdb;
-			$this->plugin_dirname = 'nextgen-gallery-date';
+			define('RCWDNGGDATE_VERSION', '0.1.5');
 			define('RCWDNGGDATE_DIRNAME', plugin_basename( dirname(__FILE__)));
 			define('RCWDNGGDATE_URLPATH', trailingslashit(plugins_url('',__FILE__)));
 			define('RCWDNGGDATE_ALBUM_TAB', $wpdb->prefix.'ngg_album');
@@ -98,6 +95,7 @@ if (!class_exists('rcwdNggDate')){
 			}
 	
 			if(!current_user_can('activate_plugins')) return;	
+			update_option( 'rcwdnggdate_version', RCWDNGGDATE_VERSION );
 			
 			if($wpdb->get_var( "SHOW TABLES LIKE '".RCWDNGGDATE_ALBUM_TAB."'")){
 				$result = $wpdb->get_row("DESC ".RCWDNGGDATE_ALBUM_TAB." added_date", ARRAY_A);
@@ -162,8 +160,20 @@ if (!class_exists('rcwdNggDate')){
 		function start_plugin(){
 			load_plugin_textdomain('nggdate', false, dirname(plugin_basename(__FILE__)).'/lang');
 			nggGallery::add_capabilites('NextGEN Date change options');
+			$this->version_check();
 		}			
 
+		function update(){
+			update_option( 'rcwdnggdate_version', RCWDNGGDATE_VERSION );
+		}
+		
+		function version_check(){
+			$old_rcwdnggdate_version = get_option('rcwdnggdate_version');
+			if( empty($old_rcwdnggdate_version) or (version_compare(RCWDNGGDATE_VERSION, $old_rcwdnggdate_version, '>') )){
+				$this->update();
+			}
+		}
+		
 		function notice(){
 			echo '<div id="message" class="error">'.__('<p><strong>NextGEN Gallery Date: * * A T T E N T I O N * *</strong><br />This first release require a (little and simple) NextGen GALLERY core modification in order to work.</p><p><a href="admin.php?page=nggdate#nggcoremod">Click here to read instructions</a> and <a href="admin.php?page=nggdate&action=remove-notice">click here to remove this alert.</a></p>', 'nggdate').'</div>';
 		}
