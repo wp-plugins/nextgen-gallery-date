@@ -84,5 +84,5 @@ if (is_admin()){
 		$gallery->counter 				= $picturesCounter->counter;
 		return $gallery;
 	}
-	//add_filter('ngg_gallery_object', 'rcwd_add_date_to_gallery_object', 10, 2);
+	add_filter('ngg_gallery_object', 'rcwd_add_date_to_gallery_object', 10, 2);
 ?>
