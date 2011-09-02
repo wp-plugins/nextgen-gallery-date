@@ -64,7 +64,6 @@ if (is_admin()){
 // FUNC: add date info to gallery object ______________________________________________________________________________________________
 
 	function rcwd_add_date_to_gallery_object($gallery, $galleryID){
-		echo 'ZZZZZZZ';
 		global $wpdb;
 		$gallery_info 					= $wpdb->get_row('SELECT * FROM '.$wpdb->nggallery.' WHERE gid = '.$galleryID);
 		$picturesCounter 				= $wpdb->get_row('SELECT COUNT(*) as counter FROM '.$wpdb->nggpictures.' WHERE galleryid = '.$galleryID);
@@ -85,5 +84,5 @@ if (is_admin()){
 		$gallery->counter 				= $picturesCounter->counter;
 		return $gallery;
 	}
-	add_filter('ngg_gallery_object', 'rcwd_add_date_to_gallery_object', 10, 2);
+	//add_filter('ngg_gallery_object', 'rcwd_add_date_to_gallery_object', 10, 2);
 ?>
